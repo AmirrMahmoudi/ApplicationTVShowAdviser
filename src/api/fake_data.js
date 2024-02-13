@@ -13,7 +13,7 @@ export const FAKE_POPULARS = [
     poster_path: "/9jkThAGYj2yp8jsS6Nriy5mzKFT.jpg",
     first_air_date: "2015-09-08",
     name: "The Late Show with Stephen Colbert",
-    vote_average: 6.479,
+    vote_average: 10,
     vote_count: 234,
   },
 ];

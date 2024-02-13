@@ -2,10 +2,22 @@
   font-weight: 400;
   font-synthesis: 35px;
 }
+.rating_container {
+  display: flex;
+}
 .rating {
+  margin-top: 3px;
+  margin-left: 5px;
 }
 .overview:hover {
   overflow-y: auto;
+}
+.overview::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 .overview {
   font-family: Roboto;
