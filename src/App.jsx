@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import { TVShowAPI } from "./api/tv-show";
 import s from "./style.module.css";
 import { BACKDROP_BASE_URL } from "./config";
-export const App = () => {
-  // (async () => {
-  //   const popularTVShowList = await TVShowAPI.fetchPopulars();
-  // })();
+import { TVShowDetail } from "./components/TVShowDetail/TVShowDetail";
 
+export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
 
   async function fetchPopulars() {
     const popularTVShowList = await TVShowAPI.fetchPopulars();
     if (popularTVShowList.length > 0) {
-      setCurrentTVShow(popularTVShowList[1]);
+      setCurrentTVShow(popularTVShowList[0]);
     }
   }
 
@@ -41,8 +39,10 @@ export const App = () => {
           </div>
         </div>
       </div>
-      <div className={s["tv_show_detail"]}>Tv Show detail</div>
+      <div className={s["tv_show_detail"]}>
+        {currentTVShow && <TVShowDetail tvShow={currentTVShow} />}
+      </div>
       <div className={s["recommended_tv_shows"]}>Recommended Tv Show</div>
     </div>
   );
-};
+}
