@@ -4,7 +4,7 @@ const MAX_TITLE_CHAR = 20;
 
 export const TVShowListItem = ({ tvShow, onClick }) => {
   const onClick_ = () => {
-    onClick();
+    onClick(tvShow);
   };
   return (
     <div onClick={onClick_} className={s.container}>
