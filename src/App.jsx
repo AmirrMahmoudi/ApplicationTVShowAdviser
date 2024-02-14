@@ -4,7 +4,8 @@ import s from "./style.module.css";
 import { BACKDROP_BASE_URL } from "./config";
 import { TVShowDetail } from "./components/TVShowDetail/TVShowDetail";
 import { Logo } from "./components/Logo.jsx/Logo";
-import logoImg from "./assets/images/logo.png"
+import logoImg from "./assets/images/logo.png";
+import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem";
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
 
@@ -32,7 +33,11 @@ export function App() {
       <div className={s.header}>
         <div className="row">
           <div className="col-4">
-            <Logo img={logoImg} title="Watwotch" subtitle="Find a show you may like" />
+            <Logo
+              img={logoImg}
+              title="Watwotch"
+              subtitle="Find a show you may like"
+            />
           </div>
           <div className="col-md-12 col-lg-4">
             <input style={{ width: "100%" }} type="text" />
@@ -42,7 +47,24 @@ export function App() {
       <div className={s["tv_show_detail"]}>
         {currentTVShow && <TVShowDetail tvShow={currentTVShow} />}
       </div>
-      <div className={s["recommended_tv_shows"]}>Recommended Tv Show</div>
+      <div className={s["recommended_tv_shows"]}>
+        {currentTVShow && (
+          <>
+            <TVShowListItem
+              tvShow={currentTVShow}
+              onClick={(tvShow) => console.log("i have been clicked", tvShow)}
+            />
+            <TVShowListItem
+              tvShow={currentTVShow}
+              onClick={(tvShow) => console.log("i have been clicked", tvShow)}
+            />
+            <TVShowListItem
+              tvShow={currentTVShow}
+              onClick={(tvShow) => console.log("i have been clicked", tvShow)}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 }
