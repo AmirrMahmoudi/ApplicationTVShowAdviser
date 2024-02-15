@@ -7,25 +7,11 @@ import { Logo } from "./components/Logo.jsx/Logo";
 import logoImg from "./assets/images/logo.png";
 import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem";
 import { TVShowList } from "./components/TVShowList/TVShowList";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
   const [recommendationList, setRecommendationList] = useState([]);
-
-  async function fetchPopulars() {
-    const popularTVShowList = await TVShowAPI.fetchPopulars();
-    if (popularTVShowList.length > 0) {
-      setCurrentTVShow(popularTVShowList[0]);
-    }
-  }
-  async function fetchRecommendations(tvShowId) {
-    const recommendationListResp = await TVShowAPI.fetchRecommendations(
-      tvShowId
-    );
-    if (recommendationListResp.length > 0) {
-      setRecommendationList(recommendationListResp.slice(0, 10));
-    }
-  }
 
   useEffect(() => {
     fetchPopulars();
@@ -36,6 +22,29 @@ export function App() {
       fetchRecommendations(currentTVShow.id);
     }
   }, [currentTVShow]);
+
+  async function fetchPopulars() {
+    const popularTVShowList = await TVShowAPI.fetchPopulars();
+    if (popularTVShowList.length > 0) {
+      setCurrentTVShow(popularTVShowList[0]);
+    }
+  }
+
+  async function fetchRecommendations(tvShowId) {
+    const recommendationListResp = await TVShowAPI.fetchRecommendations(
+      tvShowId
+    );
+    if (recommendationListResp.length > 0) {
+      setRecommendationList(recommendationListResp.slice(0, 10));
+    }
+  }
+
+  async function fetchByTitle(title) {
+    const searchResponse = await TVShowAPI.fetchByTitile(title);
+    if (searchResponse.length > 0) {
+      setCurrentTVShow(searchResponse[0]);
+    }
+  }
 
   function updateCurrentTVShow(tvShow) {
     setCurrentTVShow(tvShow);
@@ -60,7 +69,7 @@ export function App() {
             />
           </div>
           <div className="col-md-12 col-lg-4">
-            <input style={{ width: "100%" }} type="text" />
+            <SearchBar onSubmit={fetchByTitle} />
           </div>
         </div>
       </div>
